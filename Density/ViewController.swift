@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var lightLevelLabel: UILabel?
+    @IBOutlet weak var classGenderNameLabel: UILabel?
     override func viewDidLoad() {
         
         let urlString = "https://www.bungie.net/Platform/Destiny/2/Account/4611686018463007163/Summary/"
@@ -35,10 +36,6 @@ class ViewController: UIViewController {
                 let characterBase = firstCharacter?["characterBase"] as? [String:Any]
                 let lightLevel = characterBase?["powerLevel"] as! NSNumber
                 
-                DispatchQueue.main.sync(execute: {
-                    self.lightLevelLabel?.text = String(describing: lightLevel)
-                })
-                
                 let genderNumber = characterBase?["genderType"] as! NSNumber
                 var genderName = "Female"
                 if genderNumber == 0 {
@@ -57,6 +54,15 @@ class ViewController: UIViewController {
                     className = "Warlock"
                 }
                 print(className)
+                
+                let classGenderName = genderName + " " + className
+                
+                print(classGenderName)
+                
+                DispatchQueue.main.sync(execute: {
+                    self.lightLevelLabel?.text = String(describing: lightLevel)
+                    self.classGenderNameLabel?.text = String(describing: classGenderName)
+                })
             }
             catch{
                 print(error)
