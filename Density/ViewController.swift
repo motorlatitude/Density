@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var lightLevelLabel: UILabel?
     @IBOutlet weak var classGenderNameLabel: UILabel?
+    var raceHashName: String? = ""
     override func viewDidLoad() {
         
         let urlString = "https://www.bungie.net/Platform/Destiny/2/Account/4611686018463007163/Summary/"
@@ -59,9 +60,12 @@ class ViewController: UIViewController {
                 
                 print(classGenderName)
                 
+                let raceHashNumber = characterBase?["raceHash"] as! NSNumber
+                
                 DispatchQueue.main.sync(execute: {
                     self.lightLevelLabel?.text = String(describing: lightLevel)
                     self.classGenderNameLabel?.text = String(describing: classGenderName)
+                    self.raceHashName? = String(describing: raceHashNumber)
                 })
             }
             catch{
@@ -70,6 +74,7 @@ class ViewController: UIViewController {
         }
         task.resume()
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func didReceiveMemoryWarning() {
