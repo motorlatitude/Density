@@ -17,6 +17,11 @@ class APIHandler {
         self.sendRequest(endpoint_url: endpoint_url, completion: completion)
     }
     
+    func getManifestForType(type: String, hash: NSNumber, completion: @escaping ([String: Any]) -> ()){
+        let endpoint_url = host + "Manifest/" + type + "/" + String(describing: hash) + "/"
+        self.sendRequest(endpoint_url: endpoint_url, completion: completion)
+    }
+    
     func sendRequest(endpoint_url: String, completion: @escaping ([String: Any]) -> ()){
         print("Sending Request => "+endpoint_url)
         let myURL = URL(string: endpoint_url)

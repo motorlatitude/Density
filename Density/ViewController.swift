@@ -12,12 +12,16 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var emblem: UIImageView?
     @IBOutlet weak var emblemIcon: UIImageView?
+    @IBOutlet weak var classNameLabel: UILabel?
+    @IBOutlet weak var raceGenderLabel: UILabel?
+    @IBOutlet weak var characterLevelLabel: UILabel?
+    @IBOutlet weak var characterLightLevelLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         let api_hander = APIHandler()
-        api_hander.getAccountSummary(membershipType: 2, membershipId: 4611686018463007163, completion: {
+        api_hander.getAccountSummary(membershipType: 2, membershipId: 4611686018430795740, completion: {
             json in
             let response = json["Response"] as? [String:Any]
             let data_response = response?["data"] as? [String:Any]
@@ -45,8 +49,12 @@ class ViewController: UIViewController {
                     print("Could not retrieve emblem")
                 }
             }
+            let characterLevel = firstCharacter?["characterLevel"] as! NSNumber
+            print(characterLevel)
             let characterBase = firstCharacter?["characterBase"] as? [String:Any]
+            let characterLightLevel = characterBase?["powerLevel"] as! NSNumber
             let genderNumber = characterBase?["genderType"] as! NSNumber
+            let raceHash = characterBase?["raceHash"] as! NSNumber
             var genderName = "Female"
             if genderNumber == 0 {
                 genderName = "Male"
@@ -64,6 +72,16 @@ class ViewController: UIViewController {
                 className = "Warlock"
             }
             print(className)
+            api_hander.getManifestForType(type: "Race", hash: raceHash, completion: {
+                json in
+                let race = (((json["Response"] as! [String:Any])["data"] as! [String: Any])["race"] as! [String: Any])["raceName"] as! String
+                DispatchQueue.main.sync(execute: {
+                    self.classNameLabel?.text = className
+                    self.raceGenderLabel?.text = race+" "+genderName
+                    self.characterLevelLabel?.text = String(describing: characterLevel)
+                    self.characterLightLevelLabel?.text = "◆ " + String(describing: characterLightLevel)
+                })
+            })
         })
     }
 
