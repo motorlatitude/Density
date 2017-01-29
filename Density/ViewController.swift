@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var emblemIcon: UIImageView?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
         let api_hander = APIHandler()
         api_hander.getAccountSummary(membershipType: 2, membershipId: 4611686018463007163, completion: {
             json in
@@ -63,8 +65,6 @@ class ViewController: UIViewController {
             }
             print(className)
         })
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
