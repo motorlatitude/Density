@@ -32,5 +32,6 @@ class APIHandler {
                 print("Request Error")
             }
         }
+        task.resume()
     }
 }

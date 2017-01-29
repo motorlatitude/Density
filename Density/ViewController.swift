@@ -52,7 +52,6 @@ class ViewController: UIViewController {
             DispatchQueue.main.sync(execute: {
                 self.lightLevelLabel?.text = String(describing: lightLevel)
                 self.classGenderNameLabel?.text = String(describing: classGenderName)
-                self.raceHashName? = String(describing: raceHashNumber)
             })
         })
         super.viewDidLoad()
