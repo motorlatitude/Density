@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         let api_handler = APIHandler()
         api_handler.getAccountSummary(membershipType: 2, membershipID: 4611686018463007163, completion: {
             json in
+            // Calls the getAccountSummary method using given variables to return JSON data. TODO add functionality later to enter membershipType and membershipType from user-given info.
             let response = json["Response"] as! [String:Any]
             let data_response = response["data"] as? [String:Any]
             let characters: NSArray = data_response?["characters"] as! NSArray
@@ -48,6 +49,15 @@ class ViewController: UIViewController {
             print(classGenderName)
             
             let raceHashNumber = characterBase?["raceHash"] as! NSNumber
+            
+            api_handler.getRace(raceHash: raceHashNumber, completion: {
+                json in
+                let response = json["Response"] as! [String:Any]
+                let data_response = response["data"] as? [String:Any]
+                let race = data_response?["race"] as? [String:Any]
+                let raceName = race?["raceName"] as? [String:Any]
+                print(raceName)
+            })
             
             DispatchQueue.main.sync(execute: {
                 self.lightLevelLabel?.text = String(describing: lightLevel)

@@ -13,10 +13,12 @@ class APIHandler {
     func getAccountSummary(membershipType: NSNumber, membershipID: NSNumber, completion: @escaping ([String:Any]) -> ()) {
         let endpoint_url = host + String(describing: membershipType) + "/Account/" + String(describing: membershipID) + "/Summary/"
         self.sendRequest(endpoint_url: endpoint_url, completion: completion)
+        // Gets account data JSON.
     }
     func getRace(raceHash: NSNumber, completion: @escaping ([String:Any]) -> ()) {
         let endpoint_url = host + "manifest" + String(describing: raceHash) + "/"
         self.sendRequest(endpoint_url: endpoint_url, completion: completion)
+        // Uses raceHash from Account Summary to call type manifest to return race.
     }
     func sendRequest(endpoint_url: String, completion: @escaping ([String:Any]) -> ()){
         let myURL = URL(string: endpoint_url)
@@ -37,5 +39,6 @@ class APIHandler {
             }
         }
         task.resume()
+        // Main API call thingy. Calls API using URL given by either of the first two functions.
     }
 }
