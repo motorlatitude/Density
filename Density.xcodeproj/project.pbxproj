@@ -104,6 +104,15 @@
 			name = "Profile View";
 			sourceTree = "<group>";
 		};
+		B8CCDC161E3FDD0100182BF8 /* CharacterList View */ = {
+			isa = PBXGroup;
+			children = (
+				B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */,
+				B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */,
+			);
+			name = "CharacterList View";
+			sourceTree = "<group>";
+		};
 		B8F6FB551E3BB5A2004D1C81 = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +138,7 @@
 			children = (
 				B8F6FB611E3BB5A3004D1C81 /* AppDelegate.swift */,
 				B8F6FB631E3BB5A3004D1C81 /* ViewController.swift */,
-				B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */,
-				B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */,
+				B8CCDC161E3FDD0100182BF8 /* CharacterList View */,
 				B87CEEDB1E3FD6880049EB7A /* Profile View */,
 				B87CEED81E3FCB1D0049EB7A /* Bungie_API */,
 				B8F6FB651E3BB5A3004D1C81 /* Main.storyboard */,

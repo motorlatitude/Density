@@ -21,7 +21,6 @@ class profileViewController: UIViewController {
         let titleView = self.navigationItem.titleView as! profileTitleBarView
         titleView.titleLabel.text = "Profile"
         titleView.characterLabel.text = className+" // "+String(describing: characterData?["characterLevel"] as! NSNumber)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

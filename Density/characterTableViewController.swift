@@ -11,13 +11,23 @@ import UIKit
 class characterTableViewController: UITableViewController {
 
     var numberOfCharacters: Int = 0
-    var characters: NSArray = []
+    var characters = [[String: Any]]()
     var valueToPass: [String: Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
         self.tableView.delegate = self
+        self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+        self.loadCharacters()
+    }
+    
+    func refresh(sender: AnyObject){
+        loadCharacters()
+    }
+    
+    func loadCharacters(){
+        characters = [[String: Any]]()
         let api_hander = APIHandler()
         //Adz: 4611686018463007163
         //Me: 4611686018430795740
@@ -25,16 +35,26 @@ class characterTableViewController: UITableViewController {
             json in
             let response = json["Response"] as? [String:Any]
             let data_response = response?["data"] as? [String:Any]
-            self.characters = data_response?["characters"] as! NSArray
+            let chars = data_response?["characters"] as! NSArray
             self.numberOfCharacters = self.characters.count
-            DispatchQueue.main.sync(execute: {
-                self.tableView.reloadData()
-            })
-            /*
-            for i in 0 ..< characters.count {
-                let character = characters[i] as! [String: Any]
-                print(character["characterLevel"]!)
-            }*/
+            
+            for i in 0 ..< chars.count{
+                var char = chars[i] as! [String: Any]
+                let characterBase = char["characterBase"] as! [String:Any]
+                let raceHash = characterBase["raceHash"] as! NSNumber
+                api_hander.getManifestForType(type: "Race", hash: raceHash, completion: {
+                    json in
+                    let charRace = (json["Response"] as! [String:Any])["data"] as! [String: Any]
+                    char["race"] = charRace
+                    self.characters.append(char)
+                    if i >= (chars.count - 1) {
+                        DispatchQueue.main.sync(execute: {
+                            self.tableView.reloadData()
+                            self.refreshControl?.endRefreshing()
+                        })
+                    }
+                })
+            }
         })
     }
 
@@ -86,20 +106,13 @@ class characterTableViewController: UITableViewController {
             }
         }
         let genderNumber = characterBase["genderType"] as! NSNumber
-        let raceHash = characterBase["raceHash"] as! NSNumber
         var genderName = "Female"
         if genderNumber == 0 {
             genderName = "Male"
         }
-        let api_hander = APIHandler()
-        api_hander.getManifestForType(type: "Race", hash: raceHash, completion: {
-            json in
-            let race = (((json["Response"] as! [String:Any])["data"] as! [String: Any])["race"] as! [String: Any])["raceName"] as! String
-            DispatchQueue.main.sync(execute: {
-                cell.raceGenderLabel?.text = race+" "+genderName
-                cell.characterRaceData = (json["Response"] as! [String:Any])["data"] as! [String: Any]
-            })
-        })
+        let race = ((char["race"] as! [String: Any])["race"] as! [String: Any])["raceName"] as! String
+        cell.raceGenderLabel?.text = race+" "+genderName
+        cell.characterRaceData = char["race"] as? [String: Any]
         
         let characterLevel = char["characterLevel"] as! NSNumber
         let characterLightLevel = characterBase["powerLevel"] as! NSNumber
