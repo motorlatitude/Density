@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var lightLevelLabel: UILabel?
     @IBOutlet weak var classGenderNameLabel: UILabel?
-    var raceHashName: String? = ""
     override func viewDidLoad() {
         let api_handler = APIHandler()
         api_handler.getAccountSummary(membershipType: 2, membershipID: 4611686018463007163, completion: {
@@ -55,7 +54,7 @@ class ViewController: UIViewController {
                 let response = json["Response"] as! [String:Any]
                 let data_response = response["data"] as? [String:Any]
                 let race = data_response?["race"] as? [String:Any]
-                let raceName = race?["raceName"] as? [String:Any]
+                let raceName = race?["raceName"] as? NSString
                 print(raceName)
             })
             

@@ -16,7 +16,7 @@ class APIHandler {
         // Gets account data JSON.
     }
     func getRace(raceHash: NSNumber, completion: @escaping ([String:Any]) -> ()) {
-        let endpoint_url = host + "manifest" + String(describing: raceHash) + "/"
+        let endpoint_url = host + "manifest" + "/race/" + String(describing: raceHash) + "/"
         self.sendRequest(endpoint_url: endpoint_url, completion: completion)
         // Uses raceHash from Account Summary to call type manifest to return race.
     }
