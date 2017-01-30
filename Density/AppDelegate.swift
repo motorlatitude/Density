@@ -40,6 +40,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("density:// called")
+        let urlComponents = NSURLComponents(url: url as URL, resolvingAgainstBaseURL: false)
+        let items = (urlComponents?.queryItems)! as [NSURLQueryItem]
+        if (url.scheme == "density") {
+            if items.first != nil {
+                if items.first?.name == "code" {
+                    print("Authorization Token: "+(items.first?.value)!)
+                    //send authenticationComplete event along with authorization token
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "authenticationComplete"), object: (items.first?.value)!)
+                    return true
+                }
+                print(items.first?.name ?? "No parameter name")
+                return false
+            }
+            print("No parameters")
+            return false
+        }
+        print("Wrong Scheme")
+        return false
+    }
+    
 }
 

@@ -6,6 +6,11 @@
 //  Copyright © 2017 Lennart Hase. All rights reserved.
 //
 
+//
+// /!\ DEPRECEATED
+//     This ViewController is no longer in use
+//
+
 import UIKit
 
 class ViewController: UIViewController {

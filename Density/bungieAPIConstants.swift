@@ -11,6 +11,6 @@ import Foundation
 class bungieAPIConstants{
 
     let classNameForId = ["Titan","Hunter","Warlock"]
-    
+    let genderForId = ["Male","Female"]
     
 }
