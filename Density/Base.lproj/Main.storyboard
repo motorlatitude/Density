@@ -86,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1662" y="820"/>
+            <point key="canvasLocation" x="1342" y="36"/>
         </scene>
         <!--Characters-->
         <scene sceneID="OQ1-pr-z5s">
@@ -157,6 +157,7 @@
                                     <outlet property="emblem" destination="sbt-7t-rAu" id="eKP-KV-1Ng"/>
                                     <outlet property="emblemIcon" destination="794-Kn-LU7" id="wMK-U3-qw8"/>
                                     <outlet property="raceGenderLabel" destination="qoY-ns-vEA" id="i8E-nG-YxP"/>
+                                    <segue destination="T28-5Z-vsG" kind="show" id="SBx-ei-hdO"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -171,11 +172,30 @@
             </objects>
             <point key="canvasLocation" x="660" y="819.94002998500753"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="0DW-Fb-btE">
+            <objects>
+                <viewController id="T28-5Z-vsG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CMW-kD-iro"/>
+                        <viewControllerLayoutGuide type="bottom" id="yXO-wf-s4L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dCQ-1i-Cou">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="sic-US-hC0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9fS-ci-RBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1554" y="820"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="xH1-yy-pT5">
             <objects>
                 <navigationController id="Jor-qz-Hd4" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Xwz-Cd-BdE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Xwz-Cd-BdE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.060828840227541904" green="0.074418676729254188" blue="0.092921073175021185" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
