@@ -11,7 +11,8 @@
 		B831D4631E3EB5E400E49F98 /* characterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */; };
 		B831D4651E3EBE0E00E49F98 /* characterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */; };
 		B86FFE541E3F703300C7AFF5 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86FFE531E3F703300C7AFF5 /* profileViewController.swift */; };
-		B88FBC0D1E3D52C200B2182C /* AdamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88FBC0C1E3D52C200B2182C /* AdamsViewController.swift */; };
+		B86FFE561E3F7B0A00C7AFF5 /* bungieAPIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86FFE551E3F7B0A00C7AFF5 /* bungieAPIConstants.swift */; };
+		B87CEEDA1E3FCC450049EB7A /* profileTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CEED91E3FCC450049EB7A /* profileTitleBarView.swift */; };
 		B8F6FB621E3BB5A3004D1C81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F6FB611E3BB5A3004D1C81 /* AppDelegate.swift */; };
 		B8F6FB641E3BB5A3004D1C81 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F6FB631E3BB5A3004D1C81 /* ViewController.swift */; };
 		B8F6FB671E3BB5A3004D1C81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8F6FB651E3BB5A3004D1C81 /* Main.storyboard */; };
@@ -43,7 +44,8 @@
 		B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = characterTableViewController.swift; sourceTree = "<group>"; };
 		B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = characterTableViewCell.swift; sourceTree = "<group>"; };
 		B86FFE531E3F703300C7AFF5 /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
-		B88FBC0C1E3D52C200B2182C /* AdamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdamsViewController.swift; sourceTree = "<group>"; };
+		B86FFE551E3F7B0A00C7AFF5 /* bungieAPIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bungieAPIConstants.swift; sourceTree = "<group>"; };
+		B87CEED91E3FCC450049EB7A /* profileTitleBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileTitleBarView.swift; sourceTree = "<group>"; };
 		B8F6FB5E1E3BB5A3004D1C81 /* Density.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Density.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F6FB611E3BB5A3004D1C81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8F6FB631E3BB5A3004D1C81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B87CEED81E3FCB1D0049EB7A /* Bungie_API */ = {
+			isa = PBXGroup;
+			children = (
+				B831D4601E3E44C800E49F98 /* APIHandler.swift */,
+				B86FFE551E3F7B0A00C7AFF5 /* bungieAPIConstants.swift */,
+			);
+			name = Bungie_API;
+			sourceTree = "<group>";
+		};
+		B87CEEDB1E3FD6880049EB7A /* Profile View */ = {
+			isa = PBXGroup;
+			children = (
+				B86FFE531E3F703300C7AFF5 /* profileViewController.swift */,
+				B87CEED91E3FCC450049EB7A /* profileTitleBarView.swift */,
+			);
+			name = "Profile View";
+			sourceTree = "<group>";
+		};
 		B8F6FB551E3BB5A2004D1C81 = {
 			isa = PBXGroup;
 			children = (
@@ -109,15 +129,14 @@
 			children = (
 				B8F6FB611E3BB5A3004D1C81 /* AppDelegate.swift */,
 				B8F6FB631E3BB5A3004D1C81 /* ViewController.swift */,
-				B831D4601E3E44C800E49F98 /* APIHandler.swift */,
 				B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */,
 				B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */,
-				B86FFE531E3F703300C7AFF5 /* profileViewController.swift */,
+				B87CEEDB1E3FD6880049EB7A /* Profile View */,
+				B87CEED81E3FCB1D0049EB7A /* Bungie_API */,
 				B8F6FB651E3BB5A3004D1C81 /* Main.storyboard */,
 				B8F6FB681E3BB5A3004D1C81 /* Assets.xcassets */,
 				B8F6FB6A1E3BB5A3004D1C81 /* LaunchScreen.storyboard */,
 				B8F6FB6D1E3BB5A3004D1C81 /* Info.plist */,
-				B88FBC0C1E3D52C200B2182C /* AdamsViewController.swift */,
 			);
 			path = Density;
 			sourceTree = "<group>";
@@ -278,12 +297,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8F6FB641E3BB5A3004D1C81 /* ViewController.swift in Sources */,
-				B88FBC0D1E3D52C200B2182C /* AdamsViewController.swift in Sources */,
+				B86FFE561E3F7B0A00C7AFF5 /* bungieAPIConstants.swift in Sources */,
 				B86FFE541E3F703300C7AFF5 /* profileViewController.swift in Sources */,
 				B8F6FB621E3BB5A3004D1C81 /* AppDelegate.swift in Sources */,
 				B831D4651E3EBE0E00E49F98 /* characterTableViewCell.swift in Sources */,
 				B831D4631E3EB5E400E49F98 /* characterTableViewController.swift in Sources */,
 				B831D4611E3E44C800E49F98 /* APIHandler.swift in Sources */,
+				B87CEEDA1E3FCC450049EB7A /* profileTitleBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

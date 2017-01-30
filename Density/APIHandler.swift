@@ -33,7 +33,7 @@ class APIHandler {
         let task = URLSession.shared.dataTask(with: request as URLRequest){
             data, response, error in
             if (error != nil){
-                print(error)
+                print(error!)
             }
             
             do{

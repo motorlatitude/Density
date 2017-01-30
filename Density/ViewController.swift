@@ -64,17 +64,8 @@ class ViewController: UIViewController {
                 genderName = "Male"
             }
             print(genderName)
-            let classNumber = characterBase?["classType"] as! NSNumber
-            var className = ""
-            if classNumber == 0 {
-                className = "Titan"
-            }
-            else if classNumber == 1{
-                className = "Hunter"
-            }
-            else{
-                className = "Warlock"
-            }
+            let classNumber = characterBase?["classType"] as! Int
+            let className = bungieAPIConstants().classNameForId[classNumber]
             print(className)
             api_hander.getManifestForType(type: "Race", hash: raceHash, completion: {
                 json in

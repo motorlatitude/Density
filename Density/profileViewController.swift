@@ -11,23 +11,16 @@ import UIKit
 class profileViewController: UIViewController {
 
     var characterData: [String: Any]? = [:]
+    var characterRaceData: [String: Any]? = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let characterBase = characterData?["characterBase"] as! [String:Any]
-        let classNumber = characterBase["classType"] as! NSNumber
-        var className = ""
-        if classNumber == 0 {
-            className = "Titan"
-        }
-        else if classNumber == 1{
-            className = "Hunter"
-        }
-        else{
-            className = "Warlock"
-        }
-
-        self.title = className
+        let classNumber = characterBase["classType"] as! Int
+        let className = bungieAPIConstants().classNameForId[classNumber]
+        let titleView = self.navigationItem.titleView as! profileTitleBarView
+        titleView.titleLabel.text = "Profile"
+        titleView.characterLabel.text = className+" // "+String(describing: characterData?["characterLevel"] as! NSNumber)
         // Do any additional setup after loading the view.
     }
 

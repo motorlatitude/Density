@@ -54,18 +54,6 @@ class characterTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return self.characters.count
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.row)!")
-        
-        // Get Cell Label
-        let indexPath = tableView.indexPathForSelectedRow;
-        let currentCell = tableView.cellForRow(at: indexPath!) as! characterTableViewCell;
-        
-        valueToPass = currentCell.characterData!
-        //performSegue(withIdentifier: "profileSegue", sender: self)
-        
-    }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,17 +62,8 @@ class characterTableViewController: UITableViewController {
         let char = self.characters[indexPath.row] as! [String:Any]
         cell.characterData = char
         let characterBase = char["characterBase"] as! [String:Any]
-        let classNumber = characterBase["classType"] as! NSNumber
-        var className = ""
-        if classNumber == 0 {
-            className = "Titan"
-        }
-        else if classNumber == 1{
-            className = "Hunter"
-        }
-        else{
-            className = "Warlock"
-        }
+        let classNumber = characterBase["classType"] as! Int
+        let className = bungieAPIConstants().classNameForId[classNumber]
         print(className)
         cell.classNameLabel?.text = className
         if((char["backgroundPath"]) != nil){
@@ -118,6 +97,7 @@ class characterTableViewController: UITableViewController {
             let race = (((json["Response"] as! [String:Any])["data"] as! [String: Any])["race"] as! [String: Any])["raceName"] as! String
             DispatchQueue.main.sync(execute: {
                 cell.raceGenderLabel?.text = race+" "+genderName
+                cell.characterRaceData = (json["Response"] as! [String:Any])["data"] as! [String: Any]
             })
         })
         
@@ -176,6 +156,7 @@ class characterTableViewController: UITableViewController {
             let svc = segue.destination as! profileViewController
             let cell = sender as! characterTableViewCell
             svc.characterData = cell.characterData
+            svc.characterRaceData = cell.characterRaceData
         }
         
     }
