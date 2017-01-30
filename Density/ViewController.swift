@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var lightLevelLabel: UILabel?
     @IBOutlet weak var classGenderNameLabel: UILabel?
+    @IBOutlet weak var emblem: UIImageView?
+    @IBOutlet weak var background: UIImageView?
     override func viewDidLoad() {
         let api_handler = APIHandler()
         api_handler.getAccountSummary(membershipType: 2, membershipID: 4611686018463007163, completion: {
@@ -23,6 +25,31 @@ class ViewController: UIViewController {
             let firstCharacter = characters[0] as? [String:Any]
             let characterBase = firstCharacter?["characterBase"] as? [String:Any]
             let lightLevel = characterBase?["powerLevel"] as! NSNumber
+            
+            if((firstCharacter?["emblemPath"]) != nil) {
+                do {
+                    let emblemPath = firstCharacter?["emblemPath"] as! NSString
+                    let emblemURL = "https://www.bungie.net"
+                    let emblemImageString = emblemURL + String(describing: emblemPath)
+                    let emblemImageURL = URL(string: emblemImageString)
+                    let emblemImage = try UIImage(data: Data(contentsOf: emblemImageURL!))
+                    print(emblemImageURL)
+                    
+                    let backgroundPath = firstCharacter?["backgroundPath"] as! NSString
+                    let backgroundImageString = emblemURL + String(describing: backgroundPath)
+                    let backgroundImageURL = URL(string: backgroundImageString)
+                    let backgroundImage = try UIImage(data: Data(contentsOf: backgroundImageURL!))
+                    print(backgroundImageURL)
+                    
+                    DispatchQueue.main.sync(execute: {
+                        self.emblem?.image = emblemImage
+                        self.background?.image = backgroundImage
+                    })
+                }
+                catch {
+                    print("Shit son, no emblem")
+                }
+            }
             
             let genderNumber = characterBase?["genderType"] as! NSNumber
             var genderName = "Female"
@@ -49,6 +76,7 @@ class ViewController: UIViewController {
             
             let raceHashNumber = characterBase?["raceHash"] as! NSNumber
             
+       
             api_handler.getRace(raceHash: raceHashNumber, completion: {
                 json in
                 let response = json["Response"] as! [String:Any]
