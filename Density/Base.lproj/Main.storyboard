@@ -166,7 +166,11 @@
                             <outlet property="delegate" destination="T9j-Ih-a2k" id="Ohb-Cz-sPY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Characters" id="3cH-B0-d9K"/>
+                    <navigationItem key="navigationItem" title="Characters" id="3cH-B0-d9K">
+                        <barButtonItem key="backBarButtonItem" title="Back" style="done" id="cYM-wd-bKX">
+                            <color key="tintColor" red="1" green="0.90228585023564523" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tdf-Hv-8jJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -183,9 +187,13 @@
                     <view key="view" contentMode="scaleToFill" id="dCQ-1i-Cou">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.071412287650000003" green="0.087473399940000002" blue="0.108308129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="sic-US-hC0"/>
+                    <navigationItem key="navigationItem" title="Profile" id="sic-US-hC0">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="0Zd-JC-X6l">
+                            <color key="tintColor" red="1" green="0.91527543534845446" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9fS-ci-RBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -195,13 +203,13 @@
         <scene sceneID="xH1-yy-pT5">
             <objects>
                 <navigationController id="Jor-qz-Hd4" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Xwz-Cd-BdE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Xwz-Cd-BdE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.060828840227541904" green="0.074418676729254188" blue="0.092921073175021185" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="textShadowColor" red="0.0041317997739999997" green="0.38008284980000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textShadowColor" red="1" green="0.25846231476218173" blue="0.054384755953904351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xqS-2F-oCt">
