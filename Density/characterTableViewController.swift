@@ -12,10 +12,12 @@ class characterTableViewController: UITableViewController {
 
     var numberOfCharacters: Int = 0
     var characters: NSArray = []
+    var valueToPass: [String: Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
+        self.tableView.delegate = self
         let api_hander = APIHandler()
         //Adz: 4611686018463007163
         //Me: 4611686018430795740
@@ -52,12 +54,25 @@ class characterTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return self.characters.count
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row)!")
+        
+        // Get Cell Label
+        let indexPath = tableView.indexPathForSelectedRow;
+        let currentCell = tableView.cellForRow(at: indexPath!) as! characterTableViewCell;
+        
+        valueToPass = currentCell.characterData!
+        //performSegue(withIdentifier: "profileSegue", sender: self)
+        
+    }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterTableViewCell", for: indexPath) as! characterTableViewCell
         
         let char = self.characters[indexPath.row] as! [String:Any]
+        cell.characterData = char
         let characterBase = char["characterBase"] as! [String:Any]
         let classNumber = characterBase["classType"] as! NSNumber
         var className = ""
@@ -110,7 +125,6 @@ class characterTableViewController: UITableViewController {
         let characterLightLevel = characterBase["powerLevel"] as! NSNumber
         cell.characterLevelLabel?.text = String(describing: characterLevel)
         cell.characterLightLevelLabel?.text = "◆ " + String(describing: characterLightLevel)
-        
         return cell
     }
 
@@ -149,14 +163,22 @@ class characterTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        print("Switching Segue")
+        if (segue.identifier == "profileSegue") {
+            print("Switch profileSegue")
+            let svc = segue.destination as! profileViewController
+            let cell = sender as! characterTableViewCell
+            svc.characterData = cell.characterData
+        }
+        
     }
-    */
+ 
 
 }

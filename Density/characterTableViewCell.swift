@@ -16,6 +16,7 @@ class characterTableViewCell: UITableViewCell {
     @IBOutlet weak var characterLevelLabel: UILabel?
     @IBOutlet weak var characterLightLevelLabel: UILabel?
     @IBOutlet weak var raceGenderLabel: UILabel?
+    var characterData: [String: Any]?
     
     override func awakeFromNib() {
         super.awakeFromNib()

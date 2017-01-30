@@ -99,7 +99,7 @@
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.071412287650000003" green="0.087473399940000002" blue="0.108308129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="characterTableViewCell" rowHeight="80" id="6FY-hS-9hw" customClass="characterTableViewCell" customModule="Density" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="characterTableViewCell" rowHeight="80" id="6FY-hS-9hw" customClass="characterTableViewCell" customModule="Density" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6FY-hS-9hw" id="FSy-Sw-Yv9">
@@ -157,7 +157,7 @@
                                     <outlet property="emblem" destination="sbt-7t-rAu" id="eKP-KV-1Ng"/>
                                     <outlet property="emblemIcon" destination="794-Kn-LU7" id="wMK-U3-qw8"/>
                                     <outlet property="raceGenderLabel" destination="qoY-ns-vEA" id="i8E-nG-YxP"/>
-                                    <segue destination="T28-5Z-vsG" kind="show" id="SBx-ei-hdO"/>
+                                    <segue destination="T28-5Z-vsG" kind="show" identifier="profileSegue" id="w5A-Rc-oZD"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -167,7 +167,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Characters" id="3cH-B0-d9K">
-                        <barButtonItem key="backBarButtonItem" title="Back" style="done" id="cYM-wd-bKX">
+                        <barButtonItem key="backBarButtonItem" title="  " id="cYM-wd-bKX">
                             <color key="tintColor" red="1" green="0.90228585023564523" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
@@ -179,7 +179,7 @@
         <!--Profile-->
         <scene sceneID="0DW-Fb-btE">
             <objects>
-                <viewController id="T28-5Z-vsG" sceneMemberID="viewController">
+                <viewController id="T28-5Z-vsG" customClass="profileViewController" customModule="Density" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CMW-kD-iro"/>
                         <viewControllerLayoutGuide type="bottom" id="yXO-wf-s4L"/>
@@ -206,6 +206,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Xwz-Cd-BdE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.81350725889205933" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.060828840227541904" green="0.074418676729254188" blue="0.092921073175021185" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
