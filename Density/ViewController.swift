@@ -57,7 +57,6 @@ class ViewController: UIViewController {
                 let raceName = race?["raceName"] as? NSString
                 print(raceName)
             })
-            
             DispatchQueue.main.sync(execute: {
                 self.lightLevelLabel?.text = String(describing: lightLevel)
                 self.classGenderNameLabel?.text = String(describing: classGenderName)
