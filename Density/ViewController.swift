@@ -27,6 +27,10 @@ class ViewController: UIViewController {
             let data_response = response?["data"] as? [String:Any]
             let characters: NSArray = data_response?["characters"] as! NSArray
             let firstCharacter = characters[0] as? [String:Any]
+            for i in 0 ..< characters.count {
+                let character = characters[i] as! [String: Any]
+                print(character["characterLevel"]!)
+            }
             if((firstCharacter?["backgroundPath"]) != nil){
                 do{
                     print(firstCharacter?["backgroundPath"] as! String)
