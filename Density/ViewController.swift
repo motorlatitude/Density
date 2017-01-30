@@ -54,7 +54,6 @@ class ViewController: UIViewController {
                 self.classGenderNameLabel?.text = String(describing: classGenderName)
             })
         })
-        super.viewDidLoad()
     }
         // Do any additional setup after loading the view, typically from a nib.
     override func didReceiveMemoryWarning() {

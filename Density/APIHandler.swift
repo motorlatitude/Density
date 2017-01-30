@@ -14,6 +14,10 @@ class APIHandler {
         let endpoint_url = host + String(describing: membershipType) + "/Account/" + String(describing: membershipID) + "/Summary/"
         self.sendRequest(endpoint_url: endpoint_url, completion: completion)
     }
+    func getRace(raceHash: NSNumber, completion: @escaping ([String:Any]) -> ()) {
+        let endpoint_url = host + "manifest" + String(describing: raceHash) + "/"
+        self.sendRequest(endpoint_url: endpoint_url, completion: completion)
+    }
     func sendRequest(endpoint_url: String, completion: @escaping ([String:Any]) -> ()){
         let myURL = URL(string: endpoint_url)
         let request = NSMutableURLRequest(url:myURL!)
