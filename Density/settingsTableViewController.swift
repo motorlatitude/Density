@@ -14,13 +14,18 @@ import SafariServices
 
 class settingsTableViewController: UITableViewController, SFSafariViewControllerDelegate {
 
+    @IBOutlet weak var account: UITableViewCell?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let defaults = UserDefaults.standard
+        //check if user has loggedIn status
+        if defaults.bool(forKey: "loggedIn") {
+            self.account?.textLabel?.text = "Sign Out"
+        }
+        else{
+            self.account?.textLabel?.text = "Authenticate"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,25 +35,29 @@ class settingsTableViewController: UITableViewController, SFSafariViewController
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath)!
-        if selectedCell.reuseIdentifier == "auth" {
-            print("Authenticate Selected")
-            let svc = SFSafariViewController(url: URL(string: "https://www.bungie.net/en/Application/Authorize/11275")!)
-            svc.delegate = self
-            //add observer for authenticationComplete event
-            NotificationCenter.default.addObserver(self, selector: #selector(self.authTokenRecieved), name: NSNotification.Name(rawValue: "authenticationComplete"), object: nil)
-            present(svc, animated: true)
-        }
-        else if selectedCell.reuseIdentifier == "logout" {
-            //Clear all stored values
-            let defaults = UserDefaults.standard
-            defaults.setValue(nil, forKey: "accessToken")
-            defaults.setValue(nil, forKey: "accessTokenExpires")
-            defaults.setValue(false, forKey: "loggedIn")
-            defaults.setValue(nil, forKey: "refreshToken")
-            defaults.setValue(nil, forKey: "refreshTokenExpires")
-            defaults.setValue(nil, forKey: "userInfo")
-            //send logout event throughout app
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logout"), object: nil)
+        let defaults = UserDefaults.standard
+        if selectedCell.reuseIdentifier == "account" {
+            if !defaults.bool(forKey: "loggedIn") {
+                print("Authenticate Selected")
+                let svc = SFSafariViewController(url: URL(string: "https://www.bungie.net/en/Application/Authorize/11275")!)
+                svc.delegate = self
+                //add observer for authenticationComplete event
+                NotificationCenter.default.addObserver(self, selector: #selector(self.authTokenRecieved), name: NSNotification.Name(rawValue: "authenticationComplete"), object: nil)
+                present(svc, animated: true)
+            }
+            else {
+                //Clear all stored values
+                let defaults = UserDefaults.standard
+                defaults.setValue(nil, forKey: "accessToken")
+                defaults.setValue(nil, forKey: "accessTokenExpires")
+                defaults.setValue(false, forKey: "loggedIn")
+                defaults.setValue(nil, forKey: "refreshToken")
+                defaults.setValue(nil, forKey: "refreshTokenExpires")
+                defaults.setValue(nil, forKey: "userInfo")
+                self.account?.textLabel?.text = "Authenticate"
+                //send logout event throughout app
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logout"), object: nil)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -101,6 +110,7 @@ class settingsTableViewController: UITableViewController, SFSafariViewController
                         DispatchQueue.main.sync(execute: {
                             self.dismiss(animated: true)
                             //send authenticated event throughout app
+                            self.account?.textLabel?.text = "Sign Out"
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "authenticated"), object: nil)
                         })
                     })
@@ -126,12 +136,17 @@ class settingsTableViewController: UITableViewController, SFSafariViewController
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        if section == 0{
+            return 1
+        }
+        else{
+            return 2
+        }
     }
 
     /*
