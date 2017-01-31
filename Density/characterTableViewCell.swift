@@ -16,12 +16,14 @@ class characterTableViewCell: UITableViewCell {
     @IBOutlet weak var characterLevelLabel: UILabel?
     @IBOutlet weak var characterLightLevelLabel: UILabel?
     @IBOutlet weak var raceGenderLabel: UILabel?
+    @IBOutlet weak var levelProgress: UIProgressView?
     var characterData: [String: Any]?
     var characterRaceData: [String: Any]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        levelProgress?.transform = (levelProgress?.transform)!.scaledBy(x: 1, y: 4)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

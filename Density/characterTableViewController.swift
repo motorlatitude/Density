@@ -130,6 +130,8 @@ class characterTableViewController: UITableViewController {
         let race = ((char["race"] as! [String: Any])["race"] as! [String: Any])["raceName"] as! String
         cell.raceGenderLabel?.text = race+" "+genderName
         cell.characterRaceData = char["race"] as? [String: Any]
+        let progress = char["percentToNextLevel"] as! Float
+        cell.levelProgress?.progress = (100 - progress)/100
         
         let characterLevel = char["characterLevel"] as! NSNumber
         let characterLightLevel = characterBase["powerLevel"] as! NSNumber
