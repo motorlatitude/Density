@@ -41,33 +41,40 @@ class characterTableViewController: UITableViewController {
         if defaults.bool(forKey: "loggedIn") {
             overview?.removeFromSuperview()
             let userInfo = defaults.dictionary(forKey: "userInfo")
-            let membershipId = userInfo?["membershipId"] as! String
-            let membershipType = userInfo?["membershipType"] as! NSNumber
+            if userInfo != nil {
+                let membershipId = userInfo?["membershipId"] as! String
+                let membershipType = userInfo?["membershipType"] as! NSNumber
             
-            api_hander.getAccountSummary(membershipType: membershipType, membershipId: NSNumber(value: Int(membershipId)!), completion: {
-                json in
-                let response = json["Response"] as? [String:Any]
-                let data_response = response?["data"] as? [String:Any]
-                let chars = data_response?["characters"] as! NSArray
-                self.numberOfCharacters = self.characters.count
+                api_hander.getAccountSummary(membershipType: membershipType, membershipId: NSNumber(value: Int(membershipId)!), completion: {
+                    json in
+                    let response = json["Response"] as? [String:Any]
+                    let data_response = response?["data"] as? [String:Any]
+                    let chars = data_response?["characters"] as! NSArray
+                    self.numberOfCharacters = self.characters.count
             
-                for i in 0 ..< chars.count{
-                    var char = chars[i] as! [String: Any]
-                    let characterBase = char["characterBase"] as! [String:Any]
-                    let raceHash = characterBase["raceHash"] as! NSNumber
-                    api_hander.getManifestForType(type: "Race", hash: raceHash, completion: {
-                        json in
-                        let charRace = (json["Response"] as! [String:Any])["data"] as! [String: Any]
-                        char["race"] = charRace
-                        //add all characters including race info into characters Array
-                        self.characters.append(char)
-                        DispatchQueue.main.sync(execute: {
-                            self.tableView.reloadData()
-                            self.refreshControl?.endRefreshing()
+                    for i in 0 ..< chars.count{
+                        var char = chars[i] as! [String: Any]
+                        let characterBase = char["characterBase"] as! [String:Any]
+                        let raceHash = characterBase["raceHash"] as! NSNumber
+                        api_hander.getManifestForType(type: "Race", hash: raceHash, completion: {
+                            json in
+                            let charRace = (json["Response"] as! [String:Any])["data"] as! [String: Any]
+                            char["race"] = charRace
+                            //add all characters including race info into characters Array
+                            self.characters.append(char)
+                            DispatchQueue.main.sync(execute: {
+                                self.tableView.reloadData()
+                                self.refreshControl?.endRefreshing()
+                            })
                         })
-                    })
-                }
-            })
+                    }
+                })
+            }
+            else{
+                print("UserInfo Error")
+                //Something went wrong retrieving user, logout and let the user try again
+                loginHandler().logout()
+            }
         }
         else{
             print("User not signed in")
@@ -119,6 +126,7 @@ class characterTableViewController: UITableViewController {
         cell.classNameLabel?.text = className
         if((char["backgroundPath"]) != nil){
             do{
+                // TODO Fix, currently network request on redraw
                 print(char["backgroundPath"] as! String)
                 var emblemURLString = "https://www.bungie.net/"
                 emblemURLString += char["backgroundPath"] as! String

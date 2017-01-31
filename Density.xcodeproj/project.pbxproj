@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8264C7E1E412E8700CAEFEF /* loginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8264C7D1E412E8700CAEFEF /* loginHandler.swift */; };
 		B831D4611E3E44C800E49F98 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831D4601E3E44C800E49F98 /* APIHandler.swift */; };
 		B831D4631E3EB5E400E49F98 /* characterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */; };
 		B831D4651E3EBE0E00E49F98 /* characterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B8264C7D1E412E8700CAEFEF /* loginHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginHandler.swift; sourceTree = "<group>"; };
 		B831D4601E3E44C800E49F98 /* APIHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = characterTableViewController.swift; sourceTree = "<group>"; };
 		B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = characterTableViewCell.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				B831D4601E3E44C800E49F98 /* APIHandler.swift */,
 				B89CD7C01E3FFA9D0019CBD4 /* AuthAPIHandler.swift */,
 				B86FFE551E3F7B0A00C7AFF5 /* bungieAPIConstants.swift */,
+				B8264C7D1E412E8700CAEFEF /* loginHandler.swift */,
 			);
 			name = Bungie_API;
 			sourceTree = "<group>";
@@ -178,7 +181,7 @@
 				B8F6FB781E3BB5A3004D1C81 /* Info.plist */,
 			);
 			path = DensityTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		B8F6FB801E3BB5A3004D1C81 /* DensityUITests */ = {
 			isa = PBXGroup;
@@ -328,6 +331,7 @@
 			files = (
 				B8F6FB641E3BB5A3004D1C81 /* ViewController - Depreceated.swift in Sources */,
 				B86FFE561E3F7B0A00C7AFF5 /* bungieAPIConstants.swift in Sources */,
+				B8264C7E1E412E8700CAEFEF /* loginHandler.swift in Sources */,
 				B88077951E3FEC9C00ABD3D9 /* settingsTableViewController.swift in Sources */,
 				B86FFE541E3F703300C7AFF5 /* profileViewController.swift in Sources */,
 				B8F6FB621E3BB5A3004D1C81 /* AppDelegate.swift in Sources */,

@@ -48,8 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if items.first != nil {
                 if items.first?.name == "code" {
                     print("Authorization Token: "+(items.first?.value)!)
-                    //send authenticationComplete event along with authorization token
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "authenticationComplete"), object: (items.first?.value)!)
+                    loginHandler().authTokenRecieved(authorizationToken: (items.first?.value)!)
                     return true
                 }
                 print(items.first?.name ?? "No parameter name")
