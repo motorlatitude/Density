@@ -13,6 +13,7 @@ class characterTableViewController: UITableViewController {
     var numberOfCharacters: Int = 0
     var characters = [[String: Any]]()
     var valueToPass: [String: Any] = [:]
+    var overview: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class characterTableViewController: UITableViewController {
         //Me: 4611686018430795740
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: "loggedIn") {
-            
+            overview?.removeFromSuperview()
             let userInfo = defaults.dictionary(forKey: "userInfo")
             let membershipId = userInfo?["membershipId"] as! String
             let membershipType = userInfo?["membershipType"] as! NSNumber
@@ -74,6 +75,16 @@ class characterTableViewController: UITableViewController {
             self.numberOfCharacters = 0
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
+            let screenSize: CGRect = UIScreen.main.bounds
+            overview = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height))
+            overview?.backgroundColor = UIColor(red:0.10, green:0.11, blue:0.13, alpha:1.00)
+            let status = UILabel(frame: CGRect(x:0, y:(screenSize.height/2)-90, width: screenSize.width, height: 50))
+            status.text = "No Data\nSign In To Continue"
+            status.textAlignment = .center
+            status.numberOfLines = 2
+            status.textColor = UIColor(red:0.19, green:0.21, blue:0.25, alpha:1.00)
+            overview?.addSubview(status)
+            self.view.addSubview(overview!)
         }
     }
 
