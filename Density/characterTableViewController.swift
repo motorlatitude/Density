@@ -40,6 +40,7 @@ class characterTableViewController: UITableViewController {
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: "loggedIn") {
             overview?.removeFromSuperview()
+            self.setNeedsFocusUpdate()
             let userInfo = defaults.dictionary(forKey: "userInfo")
             if userInfo != nil {
                 let membershipId = userInfo?["membershipId"] as! String
@@ -62,10 +63,15 @@ class characterTableViewController: UITableViewController {
                             char["race"] = charRace
                             //add all characters including race info into characters Array
                             self.characters.append(char)
-                            DispatchQueue.main.sync(execute: {
-                                self.tableView.reloadData()
-                                self.refreshControl?.endRefreshing()
-                            })
+                            if self.characters.count == chars.count{
+                                DispatchQueue.main.sync(execute: {
+                                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                                    let sections = NSIndexSet(indexesIn: range)
+                                    self.tableView.reloadSections(sections as IndexSet, with: .fade)
+                                    //self.tableView.reloadData()
+                                    self.refreshControl?.endRefreshing()
+                                })
+                            }
                         })
                     }
                 })
@@ -99,64 +105,106 @@ class characterTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 65
+        }
+        else{
+            return 80
+        }
+    }
 
     // MARK: - Table view data source
     
-    /*override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
-    }*/
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return ""
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.characters.count
+        if section == 0{
+            return 1
+        }
+        else{
+            return self.characters.count
+        }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "characterTableViewCell", for: indexPath) as! characterTableViewCell
-        //Format Table Cell to include emblem, race, etc.
-        //NO API REQUESTS SHOULD BE DONE HERE (they will get executed on redraw - can lead to RateLimit violation)
-        let char = self.characters[indexPath.row]
-        cell.characterData = char
-        let characterBase = char["characterBase"] as! [String:Any]
-        let classNumber = characterBase["classType"] as! Int
-        let className = bungieAPIConstants().classNameForId[classNumber]
-        print(className)
-        cell.classNameLabel?.text = className
-        if((char["backgroundPath"]) != nil){
-            do{
-                // TODO Fix, currently network request on redraw
-                print(char["backgroundPath"] as! String)
-                var emblemURLString = "https://www.bungie.net/"
-                emblemURLString += char["backgroundPath"] as! String
-                let emblem_url = URL(string: emblemURLString)
-                let emblemImg = try UIImage(data: Data(contentsOf: emblem_url!))
-                
-                var emblemIconURLString = "https://www.bungie.net/"
-                emblemIconURLString += char["emblemPath"] as! String
-                let emblemIcon_url = URL(string: emblemIconURLString)
-                let emblemIconImg = try UIImage(data: Data(contentsOf: emblemIcon_url!))
-                cell.emblem?.image = emblemImg
-                cell.emblemIcon?.image = emblemIconImg
+        print(indexPath.section)
+        if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "membershipTypeCell", for: indexPath) as! membershipTypeCell
+            let defaults = UserDefaults.standard
+            if defaults.bool(forKey: "loggedIn") {
+                if defaults.integer(forKey: "membershipType") == 2{
+                    cell.serviceName?.text = "Playstation"
+                    cell.serviceIcon?.image = UIImage(named: "PSN")
+                }
+                else{
+                    cell.serviceName?.text = "XBox Live"
+                    cell.serviceIcon?.image = UIImage(named: "XBOX")
+
+                }
+                let userInfo = defaults.dictionary(forKey: "userInfo")
+                if userInfo != nil{
+                    cell.serviceType?.text = userInfo?["displayName"] as! String
+                }
+                return cell
             }
-            catch{
-                print("Could not retrieve emblem")
-            }
+            return cell
         }
-        let genderNumber = characterBase["genderType"] as! Int
-        let genderName = bungieAPIConstants().genderForId[genderNumber]
-        let race = ((char["race"] as! [String: Any])["race"] as! [String: Any])["raceName"] as! String
-        cell.raceGenderLabel?.text = race+" "+genderName
-        cell.characterRaceData = char["race"] as? [String: Any]
-        let progress = char["percentToNextLevel"] as! Float
-        cell.levelProgress?.progress = (100 - progress)/100
-        
-        let characterLevel = char["characterLevel"] as! NSNumber
-        let characterLightLevel = characterBase["powerLevel"] as! NSNumber
-        cell.characterLevelLabel?.text = String(describing: characterLevel)
-        cell.characterLightLevelLabel?.text = "◆ " + String(describing: characterLightLevel)
-        return cell
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterTableViewCell", for: indexPath) as! characterTableViewCell
+            //Format Table Cell to include emblem, race, etc.
+            //NO API REQUESTS SHOULD BE DONE HERE (they will get executed on redraw - can lead to RateLimit violation)
+            let char = self.characters[indexPath.row]
+            cell.characterData = char
+            let characterBase = char["characterBase"] as! [String:Any]
+            let classNumber = characterBase["classType"] as! Int
+            let className = bungieAPIConstants().classNameForId[classNumber]
+            print(className)
+            cell.classNameLabel?.text = className
+            if((char["backgroundPath"]) != nil){
+                do{
+                    // TODO Fix, currently network request on redraw
+                    print(char["backgroundPath"] as! String)
+                    var emblemURLString = "https://www.bungie.net/"
+                    emblemURLString += char["backgroundPath"] as! String
+                    let emblem_url = URL(string: emblemURLString)
+                    let emblemImg = try UIImage(data: Data(contentsOf: emblem_url!))
+                
+                    var emblemIconURLString = "https://www.bungie.net/"
+                    emblemIconURLString += char["emblemPath"] as! String
+                    let emblemIcon_url = URL(string: emblemIconURLString)
+                    let emblemIconImg = try UIImage(data: Data(contentsOf: emblemIcon_url!))
+                    cell.emblem?.image = emblemImg
+                    cell.emblemIcon?.image = emblemIconImg
+                }
+                catch{
+                    print("Could not retrieve emblem")
+                }
+            }
+            let genderNumber = characterBase["genderType"] as! Int
+            let genderName = bungieAPIConstants().genderForId[genderNumber]
+            let race = ((char["race"] as! [String: Any])["race"] as! [String: Any])["raceName"] as! String
+            cell.raceGenderLabel?.text = race+" "+genderName
+            cell.characterRaceData = char["race"] as? [String: Any]
+            let progress = char["percentToNextLevel"] as! Float
+            cell.levelProgress?.progress = (100 - progress)/100
+            
+            let characterLevel = char["characterLevel"] as! NSNumber
+            let characterLightLevel = characterBase["powerLevel"] as! NSNumber
+            cell.characterLevelLabel?.text = String(describing: characterLevel)
+            cell.characterLightLevelLabel?.text = "◆ " + String(describing: characterLightLevel)
+            return cell
+        }
     }
     
     // MARK: - Navigation

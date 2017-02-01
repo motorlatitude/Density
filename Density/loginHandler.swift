@@ -51,14 +51,35 @@ class loginHandler{
                         json in
                         let response = json["Response"] as! [String: Any]
                         let destinyAccounts = response["destinyAccounts"] as! NSArray
-                        let firstDestinyAccount = destinyAccounts[0] as! [String: Any]
-                        let userInfo = firstDestinyAccount["userInfo"] as! [String: Any]
-                        defaults.setValue(userInfo, forKey: "userInfo")
-                        
-                        DispatchQueue.main.sync(execute: {
-                            //send authenticated event throughout app
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "authenticated"), object: nil)
-                        })
+                        if destinyAccounts.count < 0 {
+                            print("User has not got a Xbox or PS4 destiny account")
+                        }
+                        else{
+                            for i in 0 ..< destinyAccounts.count {
+                                let membershipType = ((destinyAccounts[i] as! [String: Any])["userInfo"] as! [String: Any])["membershipType"] as! Int
+                                if defaults.integer(forKey: "membershipType") == membershipType {
+                                    //account type found, user likely wants characters from this account
+                                    let userInfo = (destinyAccounts[i] as! [String: Any])["userInfo"] as! [String: Any]
+                                    defaults.setValue(userInfo, forKey: "userInfo")
+                                }
+                            }
+                            if defaults.dictionary(forKey: "userInfo") == nil {
+                                //error
+                                self.logout()
+                                print("[Error] No userInfo stored, logging out")
+                                DispatchQueue.main.sync(execute: {
+                                    //send authenticationError event throughout app
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "authenticationError"), object: nil)
+                                })
+                                
+                            }
+                            else{
+                                DispatchQueue.main.sync(execute: {
+                                    //send authenticated event throughout app
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "authenticated"), object: nil)
+                                })
+                            }
+                        }
                     })
                 }
                 else{
@@ -81,6 +102,7 @@ class loginHandler{
         defaults.setValue(nil, forKey: "refreshToken")
         defaults.setValue(nil, forKey: "refreshTokenExpires")
         defaults.setValue(nil, forKey: "userInfo")
+        defaults.setValue(nil, forKey: "membershipType")
         //send logout event throughout app
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logout"), object: nil)
     }
