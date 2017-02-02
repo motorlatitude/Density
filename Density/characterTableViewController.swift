@@ -111,7 +111,7 @@ class characterTableViewController: UITableViewController {
             return 65
         }
         else{
-            return 80
+            return 200
         }
     }
 
@@ -154,7 +154,7 @@ class characterTableViewController: UITableViewController {
                 }
                 let userInfo = defaults.dictionary(forKey: "userInfo")
                 if userInfo != nil{
-                    cell.serviceType?.text = userInfo?["displayName"] as! String
+                    cell.serviceType?.text = userInfo?["displayName"] as? String
                 }
                 return cell
             }
@@ -164,6 +164,10 @@ class characterTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterTableViewCell", for: indexPath) as! characterTableViewCell
             //Format Table Cell to include emblem, race, etc.
             //NO API REQUESTS SHOULD BE DONE HERE (they will get executed on redraw - can lead to RateLimit violation)
+            let bgview = UIView(frame: CGRect(x:0, y:0, width: cell.frame.width, height: cell.frame.height - 8))
+            bgview.backgroundColor = UIColor(red:0.16, green:0.18, blue:0.20, alpha:1.00)
+            cell.addSubview(bgview)
+            cell.sendSubview(toBack: bgview)
             let char = self.characters[indexPath.row]
             cell.characterData = char
             let characterBase = char["characterBase"] as! [String:Any]
