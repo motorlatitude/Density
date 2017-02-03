@@ -18,6 +18,7 @@
 		B88077951E3FEC9C00ABD3D9 /* settingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88077941E3FEC9C00ABD3D9 /* settingsTableViewController.swift */; };
 		B89CD7C11E3FFA9D0019CBD4 /* AuthAPIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89CD7C01E3FFA9D0019CBD4 /* AuthAPIHandler.swift */; };
 		B8B298331E4153AD00983309 /* membershipTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B298321E4153AD00983309 /* membershipTypeCell.swift */; };
+		B8CBC62E1E4535F6003E6D16 /* profileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CBC62D1E4535F6003E6D16 /* profileCell.swift */; };
 		B8F6FB621E3BB5A3004D1C81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F6FB611E3BB5A3004D1C81 /* AppDelegate.swift */; };
 		B8F6FB641E3BB5A3004D1C81 /* ViewController - Depreceated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F6FB631E3BB5A3004D1C81 /* ViewController - Depreceated.swift */; };
 		B8F6FB671E3BB5A3004D1C81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8F6FB651E3BB5A3004D1C81 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		B88077941E3FEC9C00ABD3D9 /* settingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingsTableViewController.swift; sourceTree = "<group>"; };
 		B89CD7C01E3FFA9D0019CBD4 /* AuthAPIHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPIHandler.swift; sourceTree = "<group>"; };
 		B8B298321E4153AD00983309 /* membershipTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = membershipTypeCell.swift; sourceTree = "<group>"; };
+		B8CBC62D1E4535F6003E6D16 /* profileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileCell.swift; sourceTree = "<group>"; };
 		B8F6FB5E1E3BB5A3004D1C81 /* Density.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Density.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F6FB611E3BB5A3004D1C81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8F6FB631E3BB5A3004D1C81 /* ViewController - Depreceated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController - Depreceated.swift"; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				B831D4621E3EB5E400E49F98 /* characterTableViewController.swift */,
 				B831D4641E3EBE0E00E49F98 /* characterTableViewCell.swift */,
 				B8B298321E4153AD00983309 /* membershipTypeCell.swift */,
+				B8CBC62D1E4535F6003E6D16 /* profileCell.swift */,
 			);
 			name = "CharacterList View";
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				B8264C7E1E412E8700CAEFEF /* loginHandler.swift in Sources */,
 				B88077951E3FEC9C00ABD3D9 /* settingsTableViewController.swift in Sources */,
 				B86FFE541E3F703300C7AFF5 /* profileViewController.swift in Sources */,
+				B8CBC62E1E4535F6003E6D16 /* profileCell.swift in Sources */,
 				B8B298331E4153AD00983309 /* membershipTypeCell.swift in Sources */,
 				B8F6FB621E3BB5A3004D1C81 /* AppDelegate.swift in Sources */,
 				B89CD7C11E3FFA9D0019CBD4 /* AuthAPIHandler.swift in Sources */,

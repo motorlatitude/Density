@@ -18,6 +18,7 @@ class characterTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
+        self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
         //Handle Pull-to-Refresh
         self.refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         //Load Characters
@@ -107,7 +108,7 @@ class characterTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             return 65
         }
         else{
@@ -119,7 +120,7 @@ class characterTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -128,7 +129,7 @@ class characterTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0{
+        if section == 0 || section == 1{
             return 1
         }
         else{
@@ -140,6 +141,11 @@ class characterTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.section)
         if indexPath.section == 0{
+            print("profile section")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! profileCell
+            return cell
+        }
+        else if indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "membershipTypeCell", for: indexPath) as! membershipTypeCell
             let defaults = UserDefaults.standard
             if defaults.bool(forKey: "loggedIn") {
