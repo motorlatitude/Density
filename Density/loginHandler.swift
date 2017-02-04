@@ -55,6 +55,7 @@ class loginHandler{
                             print("User has not got a Xbox or PS4 destiny account")
                         }
                         else{
+                            defaults.setValue(response, forKey: "rawUserInfo")
                             for i in 0 ..< destinyAccounts.count {
                                 let membershipType = ((destinyAccounts[i] as! [String: Any])["userInfo"] as! [String: Any])["membershipType"] as! Int
                                 if defaults.integer(forKey: "membershipType") == membershipType {
@@ -103,6 +104,7 @@ class loginHandler{
         defaults.setValue(nil, forKey: "refreshTokenExpires")
         defaults.setValue(nil, forKey: "userInfo")
         defaults.setValue(nil, forKey: "membershipType")
+        defaults.setValue(nil, forKey: "rawUserInfo")
         //send logout event throughout app
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logout"), object: nil)
     }

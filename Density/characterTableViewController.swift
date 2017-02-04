@@ -108,7 +108,10 @@ class characterTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            return 120
+        }
+        else if indexPath.section == 1{
             return 65
         }
         else{
@@ -143,6 +146,28 @@ class characterTableViewController: UITableViewController {
         if indexPath.section == 0{
             print("profile section")
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! profileCell
+            let defaults = UserDefaults.standard
+            let userInfo = defaults.dictionary(forKey: "rawUserInfo")
+            let bungieNetUser = userInfo?["bungieNetUser"] as! [String: Any]
+            if defaults.bool(forKey: "loggedIn") {
+                print("Header")
+                do{
+                    if userInfo != nil{
+                        let header = bungieNetUser["profileThemeName"] as! String
+                        let header_url = URL(string:"https://www.bungie.net/img/UserThemes/"+header+"/header.jpg")
+                        cell.header?.image = try UIImage(data: Data(contentsOf: header_url!))
+                        
+                        let profile_icon = bungieNetUser["profilePicturePath"] as! String
+                        let profile_url = URL(string:"https://www.bungie.net/"+profile_icon)
+                        cell.profileIcon?.image = try UIImage(data: Data(contentsOf: profile_url!))
+                    }
+                }
+                catch{
+                    print("No header")
+                }
+            }
+            cell.userTitleDisplay?.text = bungieNetUser["userTitleDisplay"] as! String
+            cell.displayUsername?.text = bungieNetUser["displayName"] as! String
             return cell
         }
         else if indexPath.section == 1{
